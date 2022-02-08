@@ -1,0 +1,27 @@
+name: Publish to GitHub Pages
+on:
+  push:
+    branches: [develop]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2            
+      - name: Run Antora
+        uses: kameshsampath/antora-site-action@v0.2.4
+        with:
+          antora_playbook: antora-playbook.yml
+      - name: Testing
+        run: |
+            pwd
+            ls
+            pwd
+            ls build
+            pwd
+            ls build/site
+            pwd
+            ls build/site
+            pwd
+            ls build/site/component-b
+
