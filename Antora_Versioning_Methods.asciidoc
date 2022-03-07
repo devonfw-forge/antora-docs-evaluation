@@ -12,5 +12,5 @@ Using this method, you store each documentation version in a branch of a git rep
 Branches are ideally suited for managing multiple versions of the same content.
 
 == Conclusion
-Branches seems to meet our requirements. By creating a new branch from an existing reference in the repository to hold a new version, the repository only stores what is changed since that branch point. And that branch can receive updates at any time. That is what git does best.
+Branches seems to offer the right balance. By creating a new branch from an existing reference in the repository to hold a new version, the repository only stores what is changed since that branch point. And that branch can receive updates at any time. That is what git does best.
 Branches map well to the system of references provided by git and are flexible enough to allow documentation to be updated freely.    
