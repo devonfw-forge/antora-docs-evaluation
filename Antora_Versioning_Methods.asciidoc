@@ -8,8 +8,8 @@ If we were to use version folders to store documentation versions all in a singl
 If we were to use tags to store documentation versions, then we would not be able to update the documentation once the tag was made, effectively freezing the documentation from receiving updates.
 
 === Branches
-Using this method, you store each documentation version in a branch of a git repository, just like you use branches to store version lines of a software project. You then set the branches key (https://docs.antora.org/antora/latest/playbook/content-branches/) on the content source to tell Antora which branches to use. The name of the branch itself does not matter. It is  the version key (https://docs.antora.org/antora/latest/component-version-key/) in the component version descriptor (https://docs.antora.org/antora/latest/component-version-descriptor/) or playbook that determines the version.
-Using branches to version content is recommended method when starting with Antora. Branches are ideally suited for managing multiple versions of the same content.
+Using this method, you store each documentation version in a branch of a git repository, just like you use branches to store version lines of a software project. You then set the https://docs.antora.org/antora/latest/playbook/content-branches/[branches key] on the content source to tell Antora which branches to use. The name of the branch itself does not matter. It is the https://docs.antora.org/antora/latest/component-version-key/[version key] in the https://docs.antora.org/antora/latest/component-version-descriptor/[component version descriptor] or playbook that determines the version.
+Branches are ideally suited for managing multiple versions of the same content.
 
 == Conclusion
 Branches seems to offer the right balance. By creating a new branch from an existing reference in the repository to hold a new version, the repository only stores what is changed since that branch point. And that branch can receive updates at any time. That is what git does best.
