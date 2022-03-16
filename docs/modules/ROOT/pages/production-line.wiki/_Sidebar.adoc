@@ -1,0 +1,18 @@
+* link:Home[devonfw Production Line wiki]
+** devonfw Technologies Templates
+*** link:how-to-add-a-template[How to add a Template to your PL instance]
+*** link:devon4j-pl[devon4j Template]
+*** link:devon4ng-pl[devon4ng Template]
+*** link:devon4net-pl[devon4net Template]
+*** link:devon4node-pl[devon4node Template]
+*** link:from-existing-devonfw[From existing devonfw Template]
+** Utility Templates
+*** link:initialize-instance[Initialize Instance Template]
+*** link:install-sonar-plugin[Install SonarQube Plugin Template]
+*** link:docker-configuration[Docker Configuration Template]
+*** link:openshift-configuration[OpenShift Configuration Example]
+** MrChecker
+*** link:mrchecker[MrChecker Template]
+** Samples
+*** link:devon4j-mts[My Thai Star sample]
+** link:troubleshooting[Troubleshooting]

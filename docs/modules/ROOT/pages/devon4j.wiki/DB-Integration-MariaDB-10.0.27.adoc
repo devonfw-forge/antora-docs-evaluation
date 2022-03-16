@@ -1,0 +1,126 @@
+
+:toc: macro
+toc::[]
+
+##Guide for DBIntegration of MariaDB
+
+devon4j is by default configured with the H2 Databse. 
+ 
+To integrate devon4j with the MariaDB 10.0.27, as a first step, MariaDB 10.0.27 Database has to be installed .  Follow the link [here](https://mariadb.com/kb/en/mariadb/installing-mariadb-msi-packages-on-windows/) to install MariaDB 10.0.27
+
+
+## Using MariaDB with docker
+We can provision a MariaDB with docker by running the following line:
+
+[source,bash]
+--------
+docker run --name mariadb -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -d mariadb:10.0.28 --lower-case-table-names=1
+--------
+
+And access it using mysql console using also a docker process
+
+[source,bash]
+--------
+docker run -it --rm --link mariadb:mariadb mariadb:10.0.28 sh -c 'exec mysql -hmariadb -P3306 -uroot -ppassword'
+--------
+
+Also, when configuring the connection url value, take into acount the address of the docker machine (in windows it usually point to 192.168.99.100)
+
+[source,bash]
+----
+spring.datasource.url=jdbc:mariadb://192.168.99.100:3306/restaurant?user=root&password=password
+----
+
+
+## Enabling MariaDB and disabling h2 Database
+
+•	Assuming the MariaDB database that is created is *RESTAURANT* , execute the following script to create Flyway MetaData Table *schema_version* in the database *RESTAURANT* 
+
+[source,java]
+--------
+CREATE TABLE `schema_version` (
+	`version_rank` INT(11) NOT NULL,
+	`installed_rank` INT(11) NOT NULL,
+	`version` VARCHAR(50) NOT NULL,
+	`description` VARCHAR(200) NOT NULL,
+	`type` VARCHAR(20) NOT NULL,
+	`script` VARCHAR(1000) NOT NULL,
+	`checksum` INT(11) NULL DEFAULT NULL,
+	`installed_by` VARCHAR(100) NOT NULL,
+	`installed_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`execution_time` INT(11) NOT NULL,
+	`success` TINYINT(1) NOT NULL,
+	PRIMARY KEY (`version`),
+	INDEX `schema_version_vr_idx` (`version_rank`),
+	INDEX `schema_version_ir_idx` (`installed_rank`),
+	INDEX `schema_version_s_idx` (`success`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+--------
+ 
+•	Add the dependency for MariaDB 10.0.27 Java Connector in devon4j core module _pom.xml_. Dependency for MariaDB 10.0.27 is as follows : 
+
+[source,java]
+--------
+<dependency>
+   <groupId>org.mariadb.jdbc</groupId>
+   <artifactId>mariadb-java-client</artifactId>
+   <version>1.5.4</version>
+</dependency>
+--------
+
+•	Change the value of following property ‘spring.datasource.url’ in devon4j core module  file ‘src/main/resources/config/_application-mysql.properties_’. Accordingly, change the following properties
+
+	* Hostname
+	* Port
+	* Database Name
+	* spring.datasource.username
+	* spring.datasource.password
+
+•	Comment the spring active profile *h2mem* and uncomment the spring active profile *mysql* in core module /src/main/resources/config/_application.properties_
+
+•	Comment the line that has spring active profile *junit* and uncomment the line that has spring active profiles *junit* and *mysql* separated by comma in the core module src/test/resources/config/_application.properties_
+
+•	Run the script core/src/test/setup/mariadb.bat for Windows Environment and the script core/src/test/setup/mariadb.sh for Unix/Linux Environments.* 
+
+•	Open /devon4j-sample-core/src/test/java/io/oasp/gastronomy/restaurant/tablemanagement/service/impl/rest/TablemanagementRestServiceTest.java. In test testSaveTable() & testFindTablesByPost() change the waiterId from 2L to 3L.
+
+
+*Note*: Make sure that JUNIT Test cases run successfully for devon4j Project using the command *‘mvn clean install’*.
+
+Assuming that devon4j is integrated with MariaDB 10.0.27, following are the steps to enable H2 Database
+
+## Disabling MariaDB and enabling H2 Database
+
+•	Comment the dependency for MariaDB 10.0.27 Java Connector in devon4j core module _pom.xml_. Dependency for MariaDB 10.0.27 is as follows 
+
+[source,java]
+--------
+<!--
+<dependency>
+<groupId>org.mariadb.jdbc</groupId>
+      	<artifactId>mariadb-java-client</artifactId>
+      	<version>1.5.4</version>
+</dependency>
+-->
+--------
+
+•	Comment the spring active profile *mysql* and uncomment the spring active profile *h2mem* in core module src/main/resources/config/_application.properties_
+
+•	Uncomment the line that has spring active profile *junit* and comment the line that has spring active profiles *junit* and *mysql* separated by comma in the file core module src/test/resources/config/_application.properties_.
+
+•	Run the script core/src/test/setup/disablemariadb.bat for Windows Environment and the script core/src/test/setup/disablemariadb.sh for Unix/Linux Environments.
+
+*Note*: Make sure that JUNIT Test cases run successfully for devon4j Project using the command *‘mvn clean install’*.
+
+## Run the sample application with the Angular JS Client 
+
+•	Follow the steps mentioned https://github.com/oasp/oasp4js/wiki/tutorial-jspacking-angular-client[here]
+
+## Run the sample application with the Sencha Client 
+
+•	Follow the steps mentioned https://github.com/devonfw/devon/wiki/getting-started-deployment-on-tomcat[here]
+
+**Note** : One has to recompile devon4j project by executing the command *mvn clean install* in *devon4j* project after doing the changes mentioned in the above said instructions.   

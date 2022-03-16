@@ -1,0 +1,32 @@
+:toc: macro
+toc::[]
+
+==Errors & Fix
+
+== Unable to find valid certification path to requested target
+
+image::images/release/error_fix/ssl_certificate_error.png[,width="650",link="images/release/error_fix/ssl_certificate_error.png"]
+
+Analysis: Possible cause of error due to missing SSL certificate for Maven OSSRH portal in distribution's JRE.
+
+=== Fix
+
+Add SSL certificates for Maven repository in distribution's JRE.
+
+1. Open the links below in browser and save their SSL certificates into a file.
+
+a) https://oss.sonatype.org/service/local/staging/deploy/maven2
+
+b) https://oss.sonatype.org/content/repositories/snapshots/
+
+
+image::images/release/error_fix/save_certificate.png[,width="650", link="images/release/error_fix/save_certificate.png"]
+ 
+2. Follow the guide below to install certificates to the JRE keystore located at <distribution_root>/software/java/jre/lib/security/cacerts 
+
+https://stackoverflow.com/questions/11617210/how-to-properly-import-a-selfsigned-certificate-into-java-keystore-that-is-avail/11617655#11617655/[How to Install Certificate to JRE Keystore]
+
+
+
+ 
+

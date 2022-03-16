@@ -1,0 +1,50 @@
+=== Overview
+* link:Home.adocroduction]
+* link:Guide-to-the-Reader.adoc[Guide to the Reader]
+* link:cobigen-usecases.adoc[General CobiGen Use Cases]
+
+==== HowTo's
+* link:howto_angular-client-generation.adoc[Angular Client Generation]
+* link:howto_ionic-client-generation.adoc[Ionic Client Generation]
+* link:howto_EA-client-generation.adoc[Enterprise Architect UML diagram Generation]
+* link:howto_Cobigen-CLI-generation.adoc[CobiGen CLI Manual]
+* link:howto_update_CobiGen.adoc[Update CobiGen]
+* link:howto_devon4net.adoc[.Net generation]
+* link:howto_Release-creation.adoc[Release creation]
+* link:howto_create-external-plugin.adoc[External plugin creation]
+* link:howto-devonfw-ide-CobiGen-PoC-E2E.adoc[End to End POC Code generation using Entity class]
+* link:howto-devonfw-CobiGen-OpenAPI.adoc[End to End POC Code generation using OpenAPI]
+* link:howto-devonfw-adapt_template.adoc[Adapt Template from CobiGen]
+
+=== Configuration
+* link:cobigen-core_configuration.adoc[CobiGen Configuration]
+* link:cobigen-maven_configuration.adoc[Maven Build Plug-in Configuration]
+
+=== Eclipse Integration
+* link:cobigen-eclipse_installation.adoc[Installation]
+* link:cobigen-eclipse_usage.adoc[Usage]
+* link:cobigen-eclipse_logging.adoc[Logging]
+
+=== Core Plug-ins
+* link:cobigen-templates_helpful-links.adoc[Helpful Links]
+* link:cobigen-javaplugin.adoc[Java Plug-in]
+* link:cobigen-xmlplugin.adoc[XML Plug-in]
+* link:cobigen-propertyplugin.adoc[Property Plug-in]
+* link:cobigen-textmerger.adoc[Text Merger Plug-in]
+* link:cobigen-jsonplugin.adoc[JSON Plug-in]
+* link:cobigen-htmlplugin.adoc[HTML Plug-in]
+* link:cobigen-tsplugin.adoc[TypeScript Plug-in]
+* link:cobigen-openapiplugin.adoc[OpenAPI Plug-in]
+
+=== CobiGen Development
+* link:mgmt_ide-setup.adoc[Dev IDE Setup]
+* link:mgmt__release_and_deployment_process.adoc[Release and Deployment Process]
+* link:cobigen-documentation.adoc[Maintaining Documentation]
+* link:mgmt_dependency-and-license-tracking.adoc[License tracking of dependencies]
+* link:guide_dev_troubleshooting.adoc[Troubleshooting]
+* link:setup-jre.adoc[Setup JRE in eclipse]
+
+==== Implementation Docs
+* link:eclipse-plugin_development.adoc[Eclipse-Plugin Development]
+* link:cobigen-core_development.adoc[Core Development]
+* link:howto_create-a-new-plugin.adoc[Adding new plugin]

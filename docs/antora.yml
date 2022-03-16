@@ -1,4 +1,5 @@
-# Descriptor of the common Antora module that contains just a landing page for the whole documentation site
-name: index
-title: Index
-version: index
+name: devonfw.github.io
+title: devonfw.github.io
+version: '1.0'
+nav:
+- modules/ROOT/nav.adoc

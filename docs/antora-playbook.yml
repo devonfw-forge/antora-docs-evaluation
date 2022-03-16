@@ -1,0 +1,57 @@
+site:
+  title: Devonfw.github.io Docs
+  start_page: devonfw.github.io::index.adoc
+content:
+  sources:
+  - url: https://github.com/marvdan/devonfw.github.io.git
+    branches: developAntoraGhPage
+    start_path: docs
+  - url: https://github.com/MarvDan/architecture-guidelines.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/cicdgen.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/cobigen.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/dashboard.git
+    branches: HEAD
+  - url: https://github.com/rafaelvicariabarker/devon4j.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/devon4net.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/devon4ng.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/devon4node.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/devon4quarkus.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/devon4ts.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/.github.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/getting-started.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/hangar.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/ide.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/jump-the-queue.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/mrchecker.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/my-thai-star.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/production-line.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/shop-floor.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/solicitor.git
+    branches: HEAD
+  - url: https://github.com/MarvDan/sonar-devon4j-plugin.git
+    branches: HEAD
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+
+runtime:
+  fetch: true

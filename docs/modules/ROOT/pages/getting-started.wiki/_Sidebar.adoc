@@ -1,0 +1,44 @@
+== ==  Introduction
+
+* link:introduction-what-is-devonfw[What is devonfw?]
+
+* link:introduction-why-should-i-use-devonfw[Why should I use devonfw?]
+
+* https://github.com/devonfw/ide/blob/master/documentation/setup.adoc[devonfw-ide Download and Setup]
+
+---
+
+== ==  For Students and Junior Engineers:
+
+// * link:guide-enterprise-dev-basics[Basics of Enterprise Software Development.]
+
+* link:guide-sample-application[Explore the devonfw sample application.]
+
+* link:guide-first-application[Build your first application with *devon4j/devon4ng*.]
+
+* https://github.com/devonfw/devon4node/blob/develop/documentation/samples-step-by-step.adoc[Create an application with *devon4node*.]
+
+* https://github.com/devonfw/devon4net/blob/develop/documentation/howto.adoc[Create an application with *devon4net*.]
+
+
+== ==  For Senior Engineers and Architects:
+
+* link:guide-sample-application[Explore the devonfw sample application.]
+
+== ==  For Team Leaders and Product Ambassadors:
+
+// * link:guide-team-start[Get a team set up and running with devonfw.]
+
+* https://github.com/devonfw/solicitor[License management for OSS projects.]
+
+---
+
+== ==  Further Information
+
+* link:further-info-repo-overview[Repository Overview]
+
+* link:further-info-community-links[Community Links]
+
+* https://github.com/devonfw/.github/blob/master/CONTRIBUTING.adoc[Contributing]
+
+* https://github.com/devonfw/.github/blob/master/CODE_OF_CONDUCT.adoc[Code of Conduct]

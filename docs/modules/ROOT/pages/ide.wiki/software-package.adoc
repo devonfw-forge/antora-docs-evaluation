@@ -1,0 +1,72 @@
+:toc:
+toc::[]
+
+== Software Package
+
+The `devon-ide` requires a software package. This section explains how to build one yourself.
+
+==  Layout
+The software package is a simple ZIP file with the following structure:
+
+* software
+** eclipse
+** java
+** maven
+** tomcat
+** ...
+
+So for each tool you have a simple folder inside the `software` folder that is named after the tool by convention in lowercase. If a tool folder contains a `bin` folder the `devon-ide` will automatically add it to the beginning of your `PATH` variable (in the shell and not in your operating system). The entire concept implies that the tools are portable and do not require a real installation into the operating system (e.g. via Windows Registry settings). This way you can have multiple instances of the `devon-ide` "installed" on the same machine for different projects with different versions of the same tools that do not interfere with each other.
+
+By intention the tool folders do not contain the version of the tool as configurations may refer to tools via their path and the idea is that the software package can be updated easy and smooth.
+
+==  Customization of environment
+
+If a tool needs extra initialization, you can create a batch file named `ide-config.bat` inside the tool directory. This file will be called during environment initialization (for example when a user opens `console.bat`), and allows you to do additional init work, without changing the main `devon-ide` script files.
+
+==  Tools
+For most of the tools you just download the official release and add the content to the folder in the layout above (resulting in e.g. `software/maven/bin/mvn` and NOT `software/maven/apache-maven-3.2.0/bin/mvn`).
+However, there are some specials to care about.
+
+== Eclipse
+Eclipse is typically the most complicated animal out of the tools. Here is a suggestion how to build your eclipse distribution:
+
+. Download the latest stable version of `Eclipse IDE for JEE developers` from https://www.eclipse.org/downloads/
+. Unzip it to your `software` folder and launch it
+. Install https://github.com/devonfw/tools-cobigen/releases[CobiGen] (incremental code-generator)
+. Install http://andrei.gmxhome.de/eclipse/[any edit tools] (for easy compare with clipboard, etc.)
+. Install http://eclipse-cs.sf.net/update/[eclipse-cs] (for checkstyle support)
+. Install https://spotbugs.github.io/eclipse/[spotbugs] (successor of findbugs)
+. Install http://update.eclemma.org/[EclEmma] (for JUnit code coverage)
+. Install http://subclipse.tigris.org/update_1.10.x[subclipse] (in case SVN support is needed. Exclude Subclipse Integration for Mylyn, Subversion Revision Graph and JNA Library)
+. Install http://dist.springsource.com/release/TOOLS/update/e4.7/[STS] (in case Spring Tools are needed. Install Spring IDE [AOP | Batch | Security] Extension, Spring IDE Maven Support, Eclipse Quicksearch and Spring IDE Core)
+. Install http://basti1302.github.com/startexplorer/update/[StartExplorer] (for support to open current item in file manager of your OS)
+. Install http://marketplace.eclipse.org/content/tm-terminal[TM Terminal] (open terminal/shell inside Eclipse as view)
+. Install https://marketplace.eclipse.org/content/enhanced-class-decompiler[Enhanced Class Decompiler] (to debug in classes where no sources are available)
+. Install http://download.eclipse.org/egit/github/updates/[github mylyn integration] (for devonfw projects that want to access github issues in Eclipse)
+. Install http://download.eclipse.org/datatools/1.14.1.201712071719/repository/[Data Tools Platform] (for DB viewer/access inside Eclipse)
+. Install http://www.soapui.org/eclipse/update/site.xml[SoapUI] (for service testing)
+. Install http://regex-util.sourceforge.net/update/[regex util] (to test regular expressions)
+. Install https://m-m-m.github.io/eclipse-templatevariables/latest[TemplateVariables] (for advanced JDT templates)
+. If not already available install http://download.eclipse.org/technology/m2e/releases/[m2e] (for maven support)
+. Install https://download.eclipse.org/m2e-wtp/releases/1.4/[m2e-wtp] (for maven integration into WTP, only required for non-spring-boot legacy JEE projects)
+. Ensure you have https://github.com/devonfw/devon-ide/tree/master/eclipse-m2e[eclipse-m2e] checked out and import this into your eclipse as existing Maven project. This will trigger the download and installation of some m2e extensions.
+. If not already available install http://download.eclipse.org/egit/updates[egit] (for git support)
+. In mylyn (`Task List` view) click `Add Repository` and then `Install More Connectors...`
+.. Install `hudson/jenkins` connector
+. Download http://projectlombok.org/download.html[lombok.jar] into the `eclipse` folder (for implicit get/setter, equals and hashCode support)
+.. Start the `lombok.jar` to launch the installer UI.
+.. Click `Specify location...` and choose your `eclipse` folder.
+.. Click `Install/Update`.
+.. Quit the installer
+. Install http://downloads.sonarsource.com/eclipse/eclipse/[sonar-ide] (for SonarQube support - temporary omitted due to issue #13)
+. Optionally install https://www.genuitec.com/updates/devstyle/ci/[DevStyle] for a eye-friendly dark mode that really works (Eclipse default dark theme is completely broken and unusable)
+. Install additional plugins as needed
+. Remove any internal (non-public) update sites after installation
+. Test your Eclipse distribution.
+
+Please read the license agreements of each plugin and only install what is suitable for you.
+
+==  Creating the Software Package
+Finally you create a ZIP from your software folder. Open it and ensure the it has the specified xref:layout[layout] (it contains the `software` folder as root with the tool folders inside).
+
+You may want to use our https://github.com/devonfw/devon-ide/blob/master/software/build.xml[ant script] for building the ZIP.

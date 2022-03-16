@@ -1,0 +1,84 @@
+:toc: macro
+toc::[]
+
+== MyThaiStar
+
+include::agile.adoc[leveloffset=1]
+
+include::User-Stories.adoc[leveloffset=1]
+
+==  Technical design
+
+== Data Model
+
+include::My-Thai-Star-data-model.adoc[leveloffset=3]
+
+include::my-thai-star-nosql-data-model.adoc[leveloffset=3]
+
+== Server Side
+
+include::java-design.adoc[leveloffset=3]
+
+include::net-design.adoc[leveloffset=3]
+
+include::nodejs-design.adoc[leveloffset=3]
+
+include::serverless-design.adoc[leveloffset=3]
+
+include::graphql-design.adoc[leveloffset=3]
+
+== Client Side
+
+include::angular-design.adoc[leveloffset=3]
+
+include::xamarin-design.adoc[leveloffset=3]
+
+==  Security
+
+include::twofactor.adoc[leveloffset=2]
+
+==  Testing
+
+== Server Side
+
+include::java-testing.adoc[leveloffset=3]
+
+include::net-testing.adoc[leveloffset=3]
+
+include::nodejs-testing.adoc[leveloffset=3]
+
+include::graphql-testing.adoc[leveloffset=3]
+
+== Client Side
+
+include::angular-testing.adoc[leveloffset=3]
+
+include::xamarin-testing.adoc[leveloffset=3]
+
+== End to end
+
+include::mrchecker.adoc[leveloffset=3]
+
+==  UI design
+
+include::style-guide.adoc[leveloffset=2]
+
+==  CI/CD
+
+include::production-line-ci.adoc[leveloffset=2]
+
+include::angular-ci.adoc[leveloffset=3]
+
+include::java-ci.adoc[leveloffset=3]
+
+include::deployment.adoc[leveloffset=2]
+
+include::deployment-pipelines.adoc[leveloffset=3]
+
+include::deployment-strategies.adoc[leveloffset=3]
+
+include::future-deployment.adoc[leveloffset=3]
+
+include::traefik-reverse-proxy.adoc[leveloffset=3]
+
+include::nkaas.adoc[leveloffset=2]
