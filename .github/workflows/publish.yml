@@ -1,6 +1,6 @@
 name: Publish to GitHub Pages
 on:
-  push:
+  push: 
     branches: [develop]
 jobs:
   build:
