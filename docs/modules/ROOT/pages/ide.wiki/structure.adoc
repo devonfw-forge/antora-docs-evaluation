@@ -1,0 +1,26 @@
+:toc:
+toc::[]
+
+== Structure
+The directory layout of your `devonfw-ide` will look like this:
+
+.File structure of your devonfw-ide
+[subs=+macros]
+----
+/ projects (or C:\Projects, etc.)
+└──/ my-project (link:variables[$DEVON_IDE_HOME])
+    ├──/ link:conf[conf]
+    ├──/ link:log[log]
+    ├──/ link:scripts[scripts]
+    ├──/ link:settings[settings]
+    ├──/ link:software[software]
+    ├──/ link:system[system]
+    ├──/ link:updates[updates]
+    ├──/ link:workspaces[workspaces]
+    ├── link:setup[setup]
+    ├── link:setup[setup.bat]
+    └── devon-ide-doc.pdf
+----
+
+The elements of the above structure are described in the individual sections. As they are hyperlinks you can simply click on them to get more details.
+

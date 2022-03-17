@@ -1,0 +1,303 @@
+:toc: macro
+toc::[]
+
+##Guide for DBIntegration of Oracle 11g
+
+devon4j is by default configured with the H2 Databse. 
+ 
+To integrate devon4j with the *Oracle 11g*, as a first step , Oracle 11g Database has to be installed .  Follow the http://www.oracle.com/webfolder/technetwork/tutorials/obe/db/11g/r1/prod/install/dbinst/windbinst2.htm[link] to install *Oracle 11g*.
+
+## Installing Oracle JDBC Driver
+
+To install the Oracle JDBC Driver, run the following command
+
+[source,java]
+--------
+mvn install:install-file -Dfile=C:\app\vkiran\product\11.2.0\dbhome_1\jdbc\lib\ojdbc.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
+--------
+
+*Note*: Location of ojdbc.jar might differ based on the path that is selected at the time of installation of the Oracle 11g.
+
+## Enabling Oracle 11g and disabling h2 Database
+
+•	Assuming the Oracle database that is created is devon4j , execute the following script to create Flyway MetaData Table *schema_version* in the database devon4j
+
+[source,java]
+--------
+--------------------------------------------------------
+--  File created - Friday-December-02-2016   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table schema_version
+--------------------------------------------------------
+
+  CREATE TABLE "devon4j"."schema_version" 
+   (	"version_rank" NUMBER(*,0), 
+	"installed_rank" NUMBER(*,0), 
+	"version" VARCHAR2(50 BYTE), 
+	"description" VARCHAR2(200 BYTE), 
+	"type" VARCHAR2(20 BYTE), 
+	"script" VARCHAR2(1000 BYTE), 
+	"checksum" NUMBER(*,0), 
+	"installed_by" VARCHAR2(100 BYTE), 
+	"installed_on" TIMESTAMP (6) DEFAULT CURRENT_TIMESTAMP, 
+	"execution_time" NUMBER(*,0), 
+	"success" NUMBER(1,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index schema_version_pk
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "devon4j"."schema_version_pk" ON "devon4j"."schema_version" ("version") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index schema_version_vr_idx
+--------------------------------------------------------
+
+  CREATE INDEX "devon4j"."schema_version_vr_idx" ON "devon4j"."schema_version" ("version_rank") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index schema_version_ir_idx
+--------------------------------------------------------
+
+  CREATE INDEX "devon4j"."schema_version_ir_idx" ON "devon4j"."schema_version" ("installed_rank") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index schema_version_s_idx
+--------------------------------------------------------
+
+  CREATE INDEX "devon4j"."schema_version_s_idx" ON "devon4j"."schema_version" ("success") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  Constraints for Table schema_version
+--------------------------------------------------------
+
+  ALTER TABLE "devon4j"."schema_version" MODIFY ("version_rank" NOT NULL ENABLE);
+ 
+  ALTER TABLE "devon4j"."schema_version" MODIFY ("installed_rank" NOT NULL ENABLE);
+ 
+  ALTER TABLE "devon4j"."schema_version" MODIFY ("version" NOT NULL ENABLE);
+ 
+  ALTER TABLE "devon4j"."schema_version" MODIFY ("description" NOT NULL ENABLE);
+ 
+  ALTER TABLE "devon4j"."schema_version" MODIFY ("type" NOT NULL ENABLE);
+ 
+  ALTER TABLE "devon4j"."schema_version" MODIFY ("script" NOT NULL ENABLE);
+ 
+  ALTER TABLE "devon4j"."schema_version" MODIFY ("installed_by" NOT NULL ENABLE);
+ 
+  ALTER TABLE "devon4j"."schema_version" MODIFY ("installed_on" NOT NULL ENABLE);
+ 
+  ALTER TABLE "devon4j"."schema_version" MODIFY ("execution_time" NOT NULL ENABLE);
+ 
+  ALTER TABLE "devon4j"."schema_version" MODIFY ("success" NOT NULL ENABLE);
+ 
+  ALTER TABLE "devon4j"."schema_version" ADD CONSTRAINT "schema_version_pk" PRIMARY KEY ("version")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------
+
+•	Uncomment column annotation for ‘number’ attribute in devon4j-sample-core/src/main/java/io/gastronomy/restaurant/offermanagement/dataaccess/api/_OfferEntity.java_. Below is the uncommented code for reference.
+
+[source,java]
+--------
+/** Uncomment the following Column annotation if the database used is Oracle 11g and comment the Column annotation just before @Override annotation **/
+
+@Column(name = "\"number\"", unique = true)
+//@Column(name = "number", unique = true)
+  
+@Override
+  
+public Long getNumber() {
+return this.number;
+}
+--------
+
+•	Uncomment column annotation for ‘comment’ attribute in devon4j-sample-core/src/main/java/io/gastronomy/restaurant/offermanagement/dataaccess/api/_OrderPositionEntity.java_. Below is the uncommented code for reference
+
+[source,java]
+--------
+@Override
+  /*
+   * Uncomment the following Column annotation if the database used is Oracle 11g
+   */
+
+@Column(name = "\"comment\"")
+public String getComment() {
+
+return this.comment;
+}
+--------
+ 
+•	Uncomment column annotation for ‘comment’ attribute in devon4j-sample-core/src/main/java/io/gastronomy/restaurant/offermanagement/dataaccess/api/_TableEntity.java_. Below is the uncommented code for reference
+
+[source,java]
+--------
+@Override
+  /*
+   * Uncomment the following Column annotation if the database used is Oracle 11g and comment the Column annotation just
+   * before @Override annotation
+   */
+
+@Column(name = "\"number\"", unique = true)
+//@Column (unique = true)
+
+  	public Long getNumber() {
+
+    		return this.number;
+}
+--------
+
+•	Uncomment the dependency for the Oracle 11g jdbc driver in devon4j-sample-core/_pom.xml_. Dependency for Oracle 11g is as follows : 
+
+[source,java]
+--------
+<dependency>
+   <groupId>com.oracle</groupId>
+   <artifactId>ojdbc6</artifactId>
+   <version>11.2.0</version>
+</dependency>
+--------
+
+•	Uncomment the named native query for oracle in /devon4j-sample-core/src/main/resources/META-INF/orm.xml shown below : 
+
+[source,java]
+--------
+<named-native-query name="get.all.ids.of.payed.bills">
+    <query><![CDATA[SELECT id FROM Bill WHERE payed = 1]]></query>
+</named-native-query>
+--------
+
+And comment out the named native query for H2 shown below
+
+[source,java]
+--------
+<named-native-query name="get.all.ids.of.payed.bills">
+    <query><![CDATA[SELECT id FROM Bill WHERE payed = true]]></query>
+  </named-native-query>
+--------
+
+•	Rename file bills.csv at following path devon4j-sample-core/src/test/resources/BillExportJobTest/expected/  to bills_h2.csv
+
+•	Rename the file bills_orcl.csv  in devon4j-sample-core/src/test/resources/BillExportJobTest/expected/ to bills.csv
+
+•	Change the value of following property ‘spring.datasource.url’ in this file ‘devon4j-sample-core/src/main/resources/config/_application-orcl.properties_’. Accordingly, change the following properties:
+   * Hostname
+   * Port
+   * Database Name
+   * spring.datasource.username
+   * spring.datasource.password
+
+•	Comment the spring active profile *h2mem* and uncomment the spring active profile orcl in devon4j-sample-core/src/main/resources/config/_application.properties_.
+
+•	Comment the line that has spring active profile *junit* and uncomment the line that has spring active profiles *junit* and *orcl* separated by comma in the file devon4j-sample-core/src/test/resources/config/_application.properties_.
+
+•	Run the script core/src/test/setup/oracledb.bat for Windows Environment and the script core/src/test/setup/oracledb.sh for Unix/Linux Environments.
+
+*Note*: Make sure that JUNIT Test cases run successfully for devon4j Project using the command *‘mvn clean install’*.
+Assuming that devon4j is integrated with Oracle 11g, following are the steps to enable H2 Database
+
+## Disabling Oracle 11g and enabling H2 Database
+
+•	Comment column annotation for ‘number’ attribute in devon4j-sample-core/src/main/java/io/gastronomy/restaurant/offermanagement/dataaccess/api/_OfferEntity.java_. Below is the uncommented code for reference.
+
+[source,java]
+--------
+/** Uncomment the following Column annotation if the database used is Oracle 11g and comment the Column annotation just before @Override annotation **/
+
+//@Column(name = "\"number\"", unique = true)
+@Column(name = "number", unique = true)
+  
+@Override
+  
+public Long getNumber() {
+return this.number;
+}
+--------
+
+•	Comment column annotation for ‘comment’ attribute in devon4j-sample-core/src/main/java/io/gastronomy/restaurant/offermanagement/dataaccess/api/_OrderPositionEntity.java_. Below is the uncommented code for reference
+
+[source,java]
+--------
+@Override
+  /*
+   * Uncomment the following Column annotation if the database used is Oracle 11g
+   */
+
+//@Column(name = "\"comment\"")
+public String getComment() {
+
+return this.comment;
+}
+--------
+
+•	Comment column annotation for ‘comment’ attribute in devon4j-sample-core/src/main/java/io/gastronomy/restaurant/offermanagement/dataaccess/api/_TableEntity.java_. Below is the uncommented code for reference
+
+[source,java]
+--------
+@Override
+  /*
+   * Uncomment the following Column annotation if the database used is Oracle 11g and comment the Column annotation just
+   * before @Override annotation
+   */
+
+//@Column(name = "\"number\"", unique = true)
+@Column (unique = true)
+
+  	public Long getNumber() {
+
+    		return this.number;
+}
+--------
+
+•	Comment the dependency for the Oracle 11g jdbc driver in devon4j-sample-core/_pom.xml_. Dependency for Oracle 11g is as follows : 
+
+[source,java]
+--------
+<!--
+<dependency>
+   <groupId>com.oracle</groupId>
+   <artifactId>ojdbc6</artifactId>
+   <version>11.2.0</version>
+</dependency>
+-->
+--------
+•	Comment the spring active profile *orcl* and uncomment the spring active profile *h2mem* in devon4j-sample-core/src/main/resources/config/_application.properties_.
+
+•	Uncomment the line that has spring active profile *junit* and comment the line that has spring active profiles *junit* and *orcl* separated by comma in the file devon4j-sample-core/src/test/resources/config/_application.properties_.
+
+•	Run the script core/src/test/setup/disableoracledb.bat for Windows Environment and the script core/src/test/setup/disableoracledb.sh for Unix/Linux Environments.
+
+•	Make a copy of bills.csv at following path devon4j-sample-core/src/test/resources/BillExportJobTest/expected/ and rename it to _bills_orcl.csv_.
+
+•	Rename _bills_h2.csv_  in devon4j-sample-core/src/test/resources/BillExportJobTest/expected/ to _bills.csv_ 
+
+*Note*: Make sure that JUNIT Test cases run successfully for devon4j Project using the command *‘mvn clean install’*.
+
+## Run the sample application with the Angular JS Client 
+
+•	Follow the steps mentioned https://github.com/devonfw/devon/wiki/Client-GUI-Angular-run-oasp4js[here]
+
+## Run the sample application with the Sencha Client 
+
+•	Follow the steps mentioned https://github.com/devonfw/devon/wiki/getting-started-deployment-on-tomcat[here]
+
+**Note** : One has to recompile devon4j project by executing the command *mvn clean install* in *devon4j* project after doing the changes mentioned in the above said instructions.   

@@ -1,0 +1,141 @@
+:toc: macro
+toc::[]
+:idprefix:
+:idseparator: -
+
+
+[[introduction]]
+==Introduction
+
+This short document describes the outline of how to manage an devonfw project. It´s purpose is to be descriptive rather than prescriptive as each Product Owner should find his or her own way on the route towards efficient steering (“management”) of an Open Source project. An exception is when the word MUST (thus capitalized) is being used. In that case it is an absolute requirement to comply with the stated directive.
+
+[[prerequisites]]
+==Prerequisites
+
+It is critical that you and your contributors know Git and Github. An important distinction as they are not synonymous.
+
+*Git*: https://git-scm.com/doc[https://git-scm.com/doc]
+
+Pro Git is an excellent and free online book https://git-scm.com/book/en/v2[https://git-scm.com/book/en/v2]
+
+*Github*: https://guides.github.com/[https://guides.github.com/]
+
+*License*. Every devonfw project MUST be licensed under the Apache License version 2. For the short explanation of what this entails see: https://tldrlegal.com/license/apache-license-2.0-(apache-2.0)[https://tldrlegal.com/license/apache-license-2.0-(apache-2.0)] and for a more elaborate description see: https://www.whitesourcesoftware.com/whitesource-blog/top-10-apache-license-questions-answered/[https://www.whitesourcesoftware.com/whitesource-blog/top-10-apache-license-questions-answered/]
+
+*Documentation*: every devonfw project MUST use adoc as text document format for its own documentation. This is done in order to unify on a common documentation tool chain. See: http://adoc.org/[http://adoc.org/]
+
+Every project MUST have a README file (see down) OR use the Wiki for it´s documentation.
+
+Every project MUST have a CONTRIBUTING file and MUST have a Code of Conduct (see down). We maintain the “official” Covenant Code of Conduct that must be present in every devonfw or devonfw project at the root folder as CODE_OF_CONDUCT.adoc or CODE_OF_CONDUCT.md here:
+
+See: https://github.com/devonfw/devon/wiki/Contributing-Code-of-Conduct[https://github.com/devonfw/devon/wiki/Contributing-Code-of-Conduct]
+
+(private repo)
+
+[[steering-the-project]]
+==Steering the Project
+
+The project needs steering or managing: planning out goals, maintaining and improving documentation. This requires certain practices and tools which GitHub supports and provides out of the box:
+
+[[project-management]]
+== Project Management
+
+Leverage features like milestones and projects to group issues into related buckets of work. Projects should be managed in sprints (in agile terms with one or more projects making up a milestone. This allows the Product Owner to communicate the roadmap clearly and can help direct contributors to where help is most immediately needed. It also helps establish feature / bug delivery expectations.
+
+[[release-management]]
+== Release Management
+
+Whenever a Git tag is pushed to your repository, GitHub will create a link to a page for that tag, thus enabling the easy creation of release notes for every tag. This is useful for tracking progress over time and to keep a record of features and bugs completed.
+
+[[workflow-and-branches]]
+== Workflow and branches
+
+We recommend using Git Flow as the main workflow or paradigm. It is simple, well known and has great support in Github.
+
+See: https://guides.github.com/introduction/flow/[https://guides.github.com/introduction/flow/]
+
+*Important* the contributors MUST be using sensible working practices which fit the community's and projects working model. A good description you can find on https://github.com/devonfw/devon/wiki/devon-guide-working-with-git-and-github[https://github.com/devonfw/devon/wiki/devon-guide-working-with-git-and-github]
+
+(private devonfw repository)
+
+[[issues]]
+== Issues
+
+The central foundation or building stone of Github is the “Issue”. These are items which allow you keep track of tasks, enhancements, and bugs for your projects. They serve as the central communication medium within the team and between team and the world outsider. GitHub’s tracker is called *Issues*, and has its own section in every repository.
+
+See: https://guides.github.com/features/issues/[https://guides.github.com/features/issues/]
+
+and: link:devonfw-issue-work[https://github.com/devonfw/devon4j/wiki/devonfw-issue-work]
+
+Note that the issues and especially the comments should not be used for generic communication. Diverting from the main thread is a common anti-pattern which should be guarded against.
+
+[[wiki]]
+== Wiki
+
+The wiki is the place to organize and manage supplemental information related with the product. Rather than pack everything into the README, the wiki should be used to establish separate documentation for onboarding, migration guides, API docs and more.
+
+[[communication-gitterslackyammer]]
+== Communication: Gitter/Slack/Yammer
+
+Critical in any OSS project is communication between all participants. The issues are too limites Gitter and Slack are chat platform that integrate well with GitHub and tools like Jenkins. They allow you to foster a real time community around your project, assist others or let the community jump in and help. Yammer is a more traditional “messageboard” style service. Advantage of the latter is that it is fully supported by Capgemini whereas the former two are tolerated and just barely.
+
+[[contributors]]
+== Contributors
+
+The essence of any Open Source project is not the code but the people work contribute to the project. These people, ideally a “community”, is vital to an open source project. An active and supportive community is the heart of the project.
+
+See How to Build an OSS Community: http://oss-watch.ac.uk/resources/howtobuildcommunity[http://oss-watch.ac.uk/resources/howtobuildcommunity]
+
+[[contributing-file]]
+== CONTRIBUTING file
+
+The root of the project MUST contain a CONTRIBUTING file. It should explain how a participant should do things like:
+
+* How to report bugs
+* How to suggest improvements / new features
+* How to contribute code
+* format code
+* test fixes
+* submit patches.
+
+And more. From the Products Owner point of view, the document succinctly communicates how best to collaborate. And for a contributor, one quick check of this file verifies their submission follows the projects guidelines.
+
+The document can consist of a series of pointers to external references and standards. But it should be concise and clear.
+
+[[code-of-conduct]]
+== Code of Conduct
+
+Every project should foster and apply a _code of conduct_ which defines standards for how to engage in a community. It signals an inclusive environment that respects all contributions. It also outlines procedures for addressing problems between members of the project's community. For more information on why a code of conduct defines standards and expectations for how to engage in a community, see the Open Source Guide.: https://opensource.guide/code-of-conduct/[https://opensource.guide/code-of-conduct/]
+
+As previously stated, for devonfw and devonfw projects there is a standard CoC available.
+
+[[contributors-the-community]]
+== Contributors; the community
+
+In any OSS project the issue is never how to bind and bring enthusiasm to the core contributors. Steering them is not an easy task by itself but typically they have an internal drive which explains there higher level f contribution. And that drive makes it easier to manage their activities.
+
+The challenge is how to find and attract casual users. Those bring important contributions by themselves but they are also the most important source of new, future, “hard-core” members of the community. How to manage casual contributors to open source projects: https://opensource.com/article/17/10/managing-casual-contributors[https://opensource.com/article/17/10/managing-casual-contributors]
+
+[[documentation]]
+== Documentation
+
+Every project should contain documentation, either as a coherent README or in the wiki. If the wiki is used it´s is better to point at the wiki from the README in order to avoid duplication of information.
+
+The documentation minimally should contain:
+
+* Present the project (purpose)
+* Step-by-step install and config instruction (how to get running)
+* Status of the project (Build/info/date)
+* Basic Use cases & examples
+* Contact info
+
+[[cooperation-within-the-devonfw-platform-devonfw-core-team]]
+==Cooperation within the devonfw Platform (devonfw core team)
+
+The Product Owners and contributors are principally working on the their projects without any commitment that their contributions merit financially compensation. From within Capgemini it can be decided to have work done within working hours. And to, effectively, financially compensate for activities. Quite a few people are supported by budget provided for by either the SBU or their local BU.
+
+Apart from direct support their is a permanent support team available, the devonfw core team. The product owner can ask for support for particular issues. The devonfw (platform) Product Owner decides is an issue merits supports by the devonfw core team. Following this, the devonfw core team Team Leader can assign resources to the issue.
+
+The Product Owner should directly communicate and work together with the assigned resource. The PO is responsible for a clear definition of User Story, task description and Definition of Done/Acceptance criteria. The PO communicates with the devonfw core team lead about progression and high-level task status.
+
+In brief: the Product Owner is responsible for the content of the task. The devonfw core team lead guards against overrun of the assigned task time estimate.

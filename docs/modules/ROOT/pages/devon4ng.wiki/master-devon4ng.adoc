@@ -1,0 +1,96 @@
+== Angular
+
+
+==  Introduction
+
+include::home.adoc[leveloffset=2]
+
+==  Architecture
+
+include::architecture.adoc[leveloffset=2]
+
+include::meta-architecture.adoc[leveloffset=2]
+
+==  Layers
+
+include::components-layer.adoc[leveloffset=2]
+
+include::services-layer.adoc[leveloffset=2]
+
+==  Guides
+
+include::guide-package-managers.adoc[leveloffset=2]
+
+include::guide-npm-yarn-workflow.adoc[leveloffset=2]
+
+include::guide-yarn-2-support.adoc[leveloffset=2]
+
+==  Angular
+
+include::guide-accessibility.adoc[leveloffset=2]
+
+include::guide-angular-elements.adoc[leveloffset=2]
+
+include::guide-angular-lazy-loading.adoc[leveloffset=2]
+
+include::guide-angular-library.adoc[leveloffset=2]
+
+include::guide-angular-theming.adoc[leveloffset=2]
+
+include::guide-angular-pwa.adoc[leveloffset=2]
+
+include::guide-app-initializer.adoc[leveloffset=2]
+
+include::guide-component-decomposition.adoc[leveloffset=2]
+
+include::guide-consuming-rest-services.adoc[leveloffset=2]
+
+include::guide-error-handler.adoc[leveloffset=2]
+
+include::guide-file-structure.adoc[leveloffset=2]
+
+include::guide-internationalization.adoc[leveloffset=2]
+
+include::guide-routing.adoc[leveloffset=2]
+
+include::guide-testing.adoc[leveloffset=2]
+
+include::guide-update-angular-cli.adoc[leveloffset=2]
+
+include::guide-upgrade-devon4ng.adoc[leveloffset=2]
+
+include::guide-working-with-angular-cli.adoc[leveloffset=2]
+
+==  Ionic
+
+include::guide-ionic-getting-started.adoc[leveloffset=2]
+
+include::guide-ionic-from-code-to-android.adoc[leveloffset=2]
+
+include::guide-ionic-pwa.adoc[leveloffset=2]
+
+==  Layouts
+
+include::guide-layout-with-angular-material.adoc[leveloffset=2]
+
+==  NgRx
+
+include::guide-ngrx-getting-started.adoc[leveloffset=2]
+
+include::guide-ngrx-simple-store.adoc[leveloffset=2]
+
+include::guide-ngrx-effects.adoc[leveloffset=2]
+
+include::guide-ngrx-entity.adoc[leveloffset=2]
+
+==  Cookbook
+
+include::cookbook-abstract-class-store.adoc[leveloffset=2]
+
+include::guide-add-electron.adoc[leveloffset=2]
+
+include::guide-angular-mock-service.adoc.adoc[leveloffset=2]
+
+include::guide-cypress.adoc[leveloffset=2]
+
+include::guide-eslint.adoc[leveloffset=2]

@@ -1,0 +1,48 @@
+:toc:
+toc::[]
+
+== scripts
+This directory is the heart of the `devonfw-ide` and contains the required link:https://github.com/devonfw/ide/tree/master/scripts/src/main/resources/scripts[scripts].
+
+.File structure of the conf folder
+[subs=+macros]
+----
+/scripts
+├──/ https://github.com/devonfw/ide/tree/master/scripts/src/main/resources/scripts/command[command]
+│  ├── link:build[build]
+│  ├── link:docker[docker]
+│  ├── link:eclipse[eclipse]
+│  ├── link:gradle[gradle]
+│  ├── link:help[help]
+│  ├── link:ide[ide]
+│  ├── link:intellij[intellij]
+│  ├── link:ionic[ionic]
+│  ├── link:jasypt[jasypt]
+│  ├── link:java[java]
+│  ├── link:jenkins[jenkins]
+│  ├── link:kubectl[kubectl]
+│  ├── link:mvn[mvn]
+│  ├── link:ng[ng]
+│  ├── link:node[node]
+│  ├── link:npm[npm]
+│  ├── link:project[project]
+│  ├── link:release[release]
+│  ├── link:sonar[sonar]
+│  ├── link:vscode[vscode]
+│  └── link:yarn[yarn]
+├── link:cli[devon]
+├── link:cli[devon.bat]
+├── link:configuration[environment-project]
+├── link:configuration[environment-project.bat]
+├── link:functions[functions]
+└── link:configuration[devon.properties]
+----
+
+The https://github.com/devonfw/ide/tree/master/scripts/src/main/resources/scripts/command[command] folder contains the link:cli#commandlets[commandlets].
+The https://github.com/devonfw/ide/tree/master/scripts/src/main/resources/scripts/devon[devon] script is the key link:cli[command line interface] for `devonfw-ide`.
+There is also https://github.com/devonfw/ide/tree/master/scripts/src/main/resources/scripts/devon.bat[devon.bat] that can be used in cmd or PowerShell.
+As the `devon` link:cli[CLI] can be used as a global command on your computer from any directory and gets link:setup#install[installed] centrally, it aims to be stable, minimal, and lightweight.
+The key logic to set up the environment variables is therefore in a separate script https://github.com/devonfw/ide/tree/master/scripts/src/main/resources/scripts/environment-project[environment-project] and its Windows variant https://github.com/devonfw/ide/tree/master/scripts/src/main/resources/scripts/environment-project.bat[environment-project.bat] inside this `scripts` folder.
+The file https://github.com/devonfw/ide/tree/master/scripts/src/main/resources/scripts/functions[functions] contains a collection of reusable bash functions.
+These are sourced and used by the link:cli#commandlets[commandlets].
+Finally the `devon.properties` file contains defaults for the general link:configuration[configuration] of `devonfw-ide`.

@@ -1,0 +1,16 @@
+== devonfw-ide
+
+include::devonfw-ide-introduction.adoc[leveloffset=1]
+
+<<<<
+
+include::devonfw-ide-usage.adoc[leveloffset=1]
+
+<<<<
+
+include::devonfw-ide-advanced.adoc[leveloffset=1]
+
+<<<<
+
+include::devonfw-ide-support.adoc[leveloffset=1]
+

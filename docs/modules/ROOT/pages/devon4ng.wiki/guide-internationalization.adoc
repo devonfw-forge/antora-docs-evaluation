@@ -1,0 +1,228 @@
+:toc: macro
+
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+toc::[]
+:idprefix:
+:idseparator: -
+:reproducible:
+:source-highlighter: rouge
+:listing-caption: Listing
+
+== Internationalization
+
+Nowadays, a common scenario in front-end applications is to have the ability to translate labels and locate numbers, dates, currency and so on when the user clicks over a language selector or similar. devon4ng and specifically Angular has a default mechanism in order to fill the gap of such features, and besides there are some wide used libraries that make even easier to translate applications.
+
+More info at link:https://angular.io/guide/i18n[Angular i18n official documentation]
+
+==  devon4ng i18n approach
+
+The official approach could be a bit complicated, therefore the recommended one is to use the recommended library **Transloco** from https://github.com/ngneat/transloco/.
+
+== Install and configure Transloco
+
+In order to include this library in your devon4ng **Angular >= 7.2** project you will need to execute in a terminal:
+
+[source,bash]
+----
+$ ng add @ngneat/transloco
+----
+
+As part of the installation process you'll be presented with questions; Once you answer them, everything you need will automatically be created for you. 
+
+- First, Transloco creates boilerplate files for the requested translations.
+- Next, it will create a new file, `transloco-root.module.ts` which exposes an Angular's `module` with a default configuration, and inject it into the `AppModule`.
+
+[source,typescript]
+----
+import { HttpClient } from '@angular/common/http';
+import {
+  TRANSLOCO_LOADER,
+  Translation,
+  TranslocoLoader,
+  TRANSLOCO_CONFIG,
+  translocoConfig,
+  TranslocoModule
+} from '@ngneat/transloco';
+import { Injectable, NgModule } from '@angular/core';
+import { environment } from '../environments/environment';
+
+@Injectable({ providedIn: 'root' })
+export class TranslocoHttpLoader implements TranslocoLoader {
+  constructor(private http: HttpClient) {}
+
+  getTranslation(lang: string) {
+    return this.http.get<Translation>(`/assets/i18n/${lang}.json`);
+  }
+}
+
+@NgModule({
+  exports: [ TranslocoModule ],
+  providers: [
+    {
+      provide: TRANSLOCO_CONFIG,
+      useValue: translocoConfig({
+        availableLangs: ['en', 'es'],
+        defaultLang: 'en',
+        // Remove this option if your application doesn't support changing language in runtime.
+        reRenderOnLangChange: true,
+        prodMode: environment.production,
+      })
+    },
+    { provide: TRANSLOCO_LOADER, useClass: TranslocoHttpLoader }
+  ]
+})
+export class TranslocoRootModule {}
+----
+
+NOTE: As you might have noticed it also set an `HttpLoader` into the module's providers. The `HttpLoader` is a class that implements the `TranslocoLoader` interface. It's responsible for instructing Transloco how to load the translation files. It uses Angular HTTP client to fetch the files, based on the given path.
+
+== Usage
+In order to translate any label in any HTML template you will need to use the `transloco` pipe available:
+
+[source,html]
+----
+{{ 'HELLO' | transloco }}
+----
+
+An **optional** parameter from the component TypeScript class could be included as follows:
+
+[source,html]
+----
+{{ 'HELLO' | transloco: { value: dynamic } }}
+----
+
+It is possible to use with `inputs`:
+
+[source,html]
+----
+<span [attr.alt]="'hello' | transloco">Attribute</span>
+<span [title]="'hello' | transloco">Property</span>
+----
+
+In order to change the language used you will need to create a button or selector that calls the `this.translocoService.use(language: string)` method from `TranslocoService`. For example:
+
+[source,typescript]
+----
+
+export class AppComponent {
+  constructor(private translocoService: TranslocoService) {}
+
+  changeLanguage(lang) {
+      this.translocoService.setActiveLang(lang);
+  }
+}
+----
+
+The translations will be included in the `en.json`, `es.json`, `de.json`, etc. files inside the `/assets/i18n` folder. For example `en.json` would be (using the previous parameter):
+
+[source,json]
+----
+{
+    "HELLO": "hello"
+}
+----
+
+Or with an **optional parameter**:
+
+[source,json]
+----
+{
+    "HELLO": "hello {{value}}"
+}
+----
+
+Transloco understands nested JSON objects. This means that you can have a translation that looks like this:
+
+[source,json]
+----
+{
+    "HOME": {
+        "HELLO": "hello {{value}}"
+    }
+}
+----
+
+In order to access access the value, use the dot notation, in this case `HOME.HELLO`.
+
+== Using the service, pipe or directive
+
+== ==  Structural Directive
+Using a structural directive is the **recommended** approach. It's DRY and efficient, as it creates **one** subscription per template:
+
+[source, typescript]
+----
+<ng-container *transloco="let t">
+  <p>{{ t('title') }}</p>
+  
+  <comp [title]="t('title')"></comp>
+</ng-container>
+----
+
+Note that the `t` function is **memoized**. It means that given the same `key` it will return the result directly from the cache.
+
+We can pass a `params` object as the second parameter:
+
+[source, typescript]
+----
+<ng-container *transloco="let t">
+  <p>{{ t('name', { name: 'Transloco' }) }}</p>
+</ng-container>
+----
+
+We can instruct the directive to use a different language in our template:
+
+[source, typescript]
+----
+<ng-container *transloco="let t; lang: 'es'">
+  <p>{{ t('title') }}</p>
+</ng-container>
+----
+
+== ==  Pipe
+The use of pipes can be possible too:
+
+template:
+[source, typescript]
+----
+<div>{{ 'HELLO' | transloco:param }}</div>
+----
+
+component:
+[source, typescript]
+----
+param = {value: 'world'};
+----
+
+== ==  Attribute Directive
+The last option available with `transloco` is the attribute directive:
+
+[source, typescript]
+----
+<div transloco="HELLO" [translocoParams]="{ value: 'world' }"></div>
+----
+
+== ==  Service
+If you need to access translations in any component or service you can do it injecting the `TranslocoService` into them:
+
+[source,typescript]
+----
+// Sync translation
+translocoService.translate('HELLO', {value: 'world'});
+
+// Async translation
+translocoService.selectTranslate('HELLO', { value: 'world' }).subscribe(res => {
+    console.log(res);
+    //=> 'hello world'
+});
+----
+
+IMPORTANT: You can find a complete example at https://github.com/devonfw/devon4ng-application-template. 
+
+Please, visit https://github.com/ngneat/transloco/ for more info.

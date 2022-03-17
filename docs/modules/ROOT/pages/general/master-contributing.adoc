@@ -1,0 +1,7 @@
+== Contributing
+
+include::../devonfw-github/CONTRIBUTING.adoc[leveloffset=1]
+
+include::../devonfw-github/CODE_OF_CONDUCT.adoc[leveloffset=1]
+
+include::oss-compliance.adoc[leveloffset=1]

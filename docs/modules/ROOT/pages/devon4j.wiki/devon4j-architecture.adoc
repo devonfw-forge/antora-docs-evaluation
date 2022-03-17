@@ -1,0 +1,7 @@
+==Architecture
+
+include::architecture.adoc[leveloffset=1]
+
+<<<<
+
+include::guide-component.adoc[leveloffset=2]
