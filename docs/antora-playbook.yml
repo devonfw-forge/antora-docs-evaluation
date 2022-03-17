@@ -6,6 +6,8 @@ content:
   - url: https://github.com/marvdan/devonfw.github.io.git
     branches: developAntoraGhPage
     start_path: docs
+  - url: https://github.com/MarvDan/sonar-devon4j-plugin.git
+    branches: HEAD
   - url: https://github.com/MarvDan/architecture-guidelines.git
     branches: HEAD
   - url: https://github.com/MarvDan/cicdgen.git
@@ -46,8 +48,7 @@ content:
     branches: HEAD
   - url: https://github.com/MarvDan/solicitor.git
     branches: HEAD
-  - url: https://github.com/MarvDan/sonar-devon4j-plugin.git
-    branches: HEAD
+
 ui:
   bundle:
     url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
